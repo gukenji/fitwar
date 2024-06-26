@@ -1,0 +1,13 @@
+{
+  "git.enabled": true,
+  "files.exclude": {
+    "node_modules": true,
+    ".vscode": false,
+    ".eslintrc.cjs": true,
+    "vite.config.ts": true,
+    "tsconfig.*": true,
+    "public": true,
+    "index.html": false,
+    "src/vite-env.d.ts": true
+  }
+}

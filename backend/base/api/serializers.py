@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from base.models import Alimento, Dispensa, Ingestao, Refeicao, User
+from base.models import Alimento, Estoque, Ingestao, Refeicao, User, AlimentoInstancia
 from rest_framework import serializers
 
 
@@ -21,9 +21,13 @@ class RegistrationSerializer(ModelSerializer):
             "genero",
             "profile_pic",
         ]
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {
+            "password": {"write_only": True},
+            "profile_pic": {"required": False},
+        }
 
     def save(self):
+        print(self.validated_data)
         user = User(
             email=self.validated_data["email"],
             nome=self.validated_data["nome"],
@@ -31,7 +35,11 @@ class RegistrationSerializer(ModelSerializer):
             peso=self.validated_data["peso"],
             data_nascimento=self.validated_data["data_nascimento"],
             genero=self.validated_data["genero"],
-            profile_pic=self.validated_data["profile_pic"]
+            profile_pic=(
+                self.validated_data["profile_pic"]
+                if "profile_pic" in self.validated_data
+                else None
+            ),
         )
 
         password = self.validated_data["password"]
@@ -50,9 +58,9 @@ class AlimentoSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class DispensaSerializer(ModelSerializer):
+class EstoqueSerializer(ModelSerializer):
     class Meta:
-        model = Dispensa
+        model = Estoque
         fields = "__all__"
 
 
@@ -68,10 +76,7 @@ class IngestaoSerializer(ModelSerializer):
         fields = "__all__"
 
 
-# class GetInventorySerializer(ModelSerializer):
-#     class Meta:
-#         model = Inventory
-#         fields = ["food", "id", "quantity"]
-#         depth = 1
-
-
+class AlimentoInstanciaSerializer(ModelSerializer):
+    class Meta:
+        model = AlimentoInstancia
+        fields = "__all__"

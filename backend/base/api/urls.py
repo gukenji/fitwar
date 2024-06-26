@@ -11,14 +11,15 @@ urlpatterns = [
     path("users/cadastrar/", views.cadastrar, name="cadastrar"),
     path("users/<str:email>/", views.checkAccountExist),
     path("alimentos/", views.alimentos),
-    # path("alimentos/<str:pk>", views.alimento),
-    path("dispensas/", views.dispensas),
-    # path("dispensas/<str:pk>", views.dispensa),
+    path("alimentos/<str:pk>/", views.alimento),
+    path("estoques/", views.estoques),
+    path("estoques/<str:pk>/", views.estoque),
     path("refeicoes/", views.refeicoes),
-    # path("refeicoes/<str:pk>", views.refeicao),
+    path("refeicoes/<str:pk>/", views.refeicao),
     path("ingestoes/", views.ingestoes),
-
-
+    path("ingestoes/<str:pk>/", views.ingestao),
+    path("alimentos-instancias/", views.alimentosInstancias),
+    path("alimentos-instancias/<str:pk>/", views.alimentoInstancia),
 
     
     # path("inventory/", views.includeToInventory),
